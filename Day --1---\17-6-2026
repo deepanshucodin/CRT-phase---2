@@ -1,0 +1,152 @@
+//problem 1 -- two sum using hash map  leetcode no. --1
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+       unordered_map<int, int> map;
+       for(int i =0;i<nums.size();i++){
+        int compliment = target-nums[i];
+
+        if(map.find(compliment) !=map.end()){
+            return{map[compliment], i};
+        }
+        map[nums[i]]=i;
+       } 
+       return{-1,-1};
+    }
+};
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+//problem 2-- maxsum subarray    leetcode no. -- 53  using brute force
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+       int n=nums.size();
+       int maxsum=INT_MIN;
+       for(int i=0;i<n;i++){
+        int sum = 0;
+        for(int j=i;j<n;j++){
+            sum=sum+nums[j];
+            maxsum = max(maxsum,sum);
+
+        }
+       }
+       return maxsum;
+    }
+};
+
+
+////////////////////////////////////////////
+  // leetcode 53   using        --Kadane's Algorithm
+
+
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+       int n=nums.size();
+       int maxsum=INT_MIN;
+       int sum = 0;
+       for(int i=0;i<n;i++){
+        sum=sum+nums[i];
+        if (sum>maxsum)maxsum=sum;
+        if(sum<0)sum=0;
+       
+
+        
+       }
+       return maxsum;
+    }
+};
+
+
+----------------------------------------------------------------------------------------------------
+//problem 3-----sort colors----------leetcode problem no. --75 -using swap
+
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int n = nums.size();
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(nums[i]<nums[j]){
+                    swap(nums[i],nums[j]);
+                }
+
+            }
+        }
+    }
+};
+
+
+
+
+/////////////////////////////
+
+//using brute force
+
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+    int count0=0;
+    int count1=0;
+    int count2=0;
+    for(int i =0; i<nums.size();i++){
+        if(nums[i]==0){
+            count0++;
+        }
+        else if(nums[i]==1){
+            count1++;
+        }
+        else{
+            count2++;
+        }
+    }    
+    for(int i = 0; i< nums.size();i++){
+        if(i<count0){
+            nums[i]=0;
+        }else if(i < count0+count1){
+            nums[i]=1;
+        }else{
+            nums[i]=2;
+        }
+    }
+    }
+};
+
+///////////////////////////////////////////////
+//dutch flag approach
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int low = 0;
+        int mid = 0;
+        int high = nums.size() - 1;
+        
+        while (mid <= high) {
+            if (nums[mid] == 0) {
+                swap(nums[low], nums[mid]);
+                low++;
+                mid++;
+            } 
+            else if (nums[mid] == 1) {
+                mid++;
+            } 
+            else { // nums[mid] == 2
+                swap(nums[mid], nums[high]);
+                high--;
+            }
+        }
+    }
+};
+
+
+
+
+
+
